@@ -1,0 +1,46 @@
+id: com.slack.sleuth
+base: org.electronjs.Electron2.BaseApp
+base-version: '23.08'
+runtime: org.freedesktop.Platform
+runtime-version: '23.08'
+sdk: org.freedesktop.Sdk
+command: com.slack.sleuth
+separate-locales: false
+finish-args:
+  - --device=dri
+  - --filesystem=xdg-download
+  - --socket=x11
+  - --system-talk-name=org.freedesktop.login1
+modules:
+  - name: sleuth
+    buildsystem: simple
+    build-commands:
+      - install -Dm755 apply_extra ${FLATPAK_DEST}/bin
+      - install -Dm755 ${FLATPAK_ID} ${FLATPAK_DEST}/bin
+      - install -Dm644 ${FLATPAK_ID}.desktop ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop
+      - install -Dm644 ${FLATPAK_ID}.metainfo.xml ${FLATPAK_DEST}/share/metainfo/${FLATPAK_ID}.metainfo.xml
+      - install -Dm644 ${FLATPAK_ID}.png ${FLATPAK_DEST}/share/icons/hicolor/512x512/apps/${FLATPAK_ID}.png
+    sources:
+      - type: file
+        path: com.slack.sleuth.desktop
+      - type: file
+        path: com.slack.sleuth.metainfo.xml
+      - type: file
+        path: com.slack.sleuth.png
+      - type: extra-data
+        filename: sleuth_3.5.4_amd64.deb
+        only-arches: [x86_64]
+        url: https://github.com/tinyspeck/sleuth/releases/download/v3.5.4/sleuth_3.5.4_amd64.deb
+        sha256: e5bace3993d7eca2eeffab71ff49f15a7c6637f5056f50b73578e48de05184f0
+        size: 91264420
+      - type: script
+        dest-filename: apply_extra
+        commands:
+          - bsdtar -xf sleuth_3.5.4_amd64.deb data.tar.xz
+          - rm sleuth_3.5.4_amd64.deb
+          - tar xf data.tar.xz --strip-components=4 ./usr/lib/sleuth
+          - rm data.tar.xz
+      - type: script
+        dest-filename: com.slack.sleuth
+        commands:
+          - zypak-wrapper.sh /app/extra/sleuth "$@"

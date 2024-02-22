@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Copyright 2024 Slack Technologies, Inc. -->
+<component type="desktop-application">
+  <id>com.slack.sleuth</id>
+  <metadata_license>CC0-1.0</metadata_license>
+  <developer id="slack.com">
+    <name>Slack Technologies Inc.</name>
+  </developer>
+  <project_group>Slack Technologies Inc.</project_group>
+  <project_license>MIT</project_license>
+  <name>Sleuth</name>
+  <summary>Slack log viewer</summary>
+
+  <description>
+    <p>
+      Tool to review Slack logs with a detailed overview that sorts debug, info, warn and errors.
+    </p>
+  </description>
+
+  <launchable type="desktop-id">com.slack.sleuth.desktop</launchable>
+
+  <provides>
+    <mediatype>x-scheme-handler/sleuth</mediatype>
+  </provides>
+
+  <requires>
+    <internet>offline-only</internet>
+  </requires>
+
+  <supports>
+    <control>keyboard</control>
+    <control>pointing</control>
+    <control>touch</control>
+    <display_length compare="ge">768</display_length>
+  </supports>
+
+  <content_rating type="oars-1.0" />
+
+  <releases>
+    <release version="3.5.4" date="2024-02-02">
+      <description>
+        <p>What's Changed</p>
+        <ul>
+          <li>Support longer iOS filenames</li>
+          <li>Use Electron Forge 7</li>
+          <li>Add dark mode to preferences menu</li>
+          <li>Search improvements</li>
+          <li>Move packages to correct dev/dependency spot</li>
+        </ul>
+      </description>
+    </release>
+  </releases>
+</component>

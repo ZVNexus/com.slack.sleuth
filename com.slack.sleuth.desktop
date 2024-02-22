@@ -1,0 +1,10 @@
+[Desktop Entry]
+Type=Application
+Version=1.1
+Name=Sleuth
+Icon=com.slack.sleuth
+Exec=com.slack.sleuth %U
+MimeType=x-scheme-handler/sleuth;
+Categories=Utility;
+StartupNotify=true
+StartupWMClass=Sleuth
